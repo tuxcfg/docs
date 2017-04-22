@@ -35,6 +35,14 @@ sudo apt update
 sudo apt install oracle-java8-installer
 ```
 
+[Atom](https://github.com/atom/atom):
+
+```bash
+sudo add-apt-repository ppa:webupd8team/atom
+sudo apt-get update
+sudo apt install atom
+```
+
 [NodeJS](https://nodejs.org/en/download/package-manager/):
 
 ```bash
