@@ -69,7 +69,7 @@ Install operating system, do not reboot and then finalize setup:
 
 ```bash
 sudo mount /dev/mapper/crypto-root /mnt
-sudo mount /dev/sde1 /mnt/boot
+sudo mount /dev/sda2 /mnt/boot
 sudo mount -o bind /dev /mnt/dev
 sudo mount -t proc proc /mnt/proc
 sudo mount -t sysfs sys /mnt/sys
