@@ -6,7 +6,7 @@ Regenerating weak system SSH host keys (make sense only for RSA and ECDSA):
 ```bash
 sudo ssh-keygen -N '' -o -t ed25519 -f /etc/ssh/ssh_host_ed25519_key
 sudo ssh-keygen -N '' -o -t rsa -b 4096 -f /etc/ssh/ssh_host_rsa_key
-sudo ssh-keygen -N '' -o -t ecdsa -b 512 -f /etc/ssh/ssh_host_ecdsa_key
+sudo ssh-keygen -N '' -o -t ecdsa -b 521 -f /etc/ssh/ssh_host_ecdsa_key
 ```
 
 Generate user keys:
@@ -14,7 +14,7 @@ Generate user keys:
 ```bash
 ssh-keygen -o -a 256 -t ed25519
 ssh-keygen -o -a 256 -t rsa -b 4096
-ssh-keygen -o -a 256 -t ecdsa -b 512
+ssh-keygen -o -a 256 -t ecdsa -b 521
 ```
 
 Print key fingerprints:
