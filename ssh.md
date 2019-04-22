@@ -66,6 +66,54 @@ sshd -t && service ssh reload && service ssh restart
 ```
 
 
+## Limit remote access ##
+
+There are some approaches below sorted by preference.
+
+### Host without Docker ###
+
+The most secure and efficient approach is to use `iptables`:
+
+```bash
+# put your port and IPs here
+iptables -A INPUT -p tcp --dport 8192 --source 10.0.0.10,10.0.0.100 -j ACCEPT
+iptables -A INPUT -p tcp --dport 8192 -j DROP
+```
+
+Install a special service to restore `iptables` rules after reboot:
+
+```bash
+# rules will be saved during the installation
+apt install iptables-persistent
+# or save manually if necessary
+iptables-save > /etc/iptables/rules.v4
+```
+
+### Host with Docker ###
+
+It's difficult to use `iptables` in this case as Docker injects its own rules.
+So it's necessary to configure which hosts can connect using TCP wrappers.
+By default, deny all hosts in file `/etc/hosts.deny`:
+
+```
+sshd: ALL
+```
+
+Then list allowed hosts in `/etc/hosts.allow`:
+
+```
+sshd: 10.0.0.10, 10.0.0.100
+```
+
+### Native SSH approach ###
+
+List all allowed IPs in `/etc/ssh/sshd_config` file:
+
+```
+AllowUsers = *@10.0.0.10, *@10.0.0.100
+``` 
+
+
 ## Moduli ## 
 
 The `/etc/ssh/moduli` file contains prime numbers and generators for use by sshd in the Diffie-Hellman Group Exchange key exchange method.
