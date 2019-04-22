@@ -34,6 +34,37 @@ Print key fingerprints:
 for file in ~/.ssh/*.pub; do ssh-keygen -lf $file; done
 ```
 
+## Configure server and enable 2FA ##
+
+Add hardening options in `/etc/ssh/sshd_config`:
+
+```
+Port 8192
+LogLevel VERBOSE
+Subsystem sftp /usr/lib/openssh/sftp-server -f AUTHPRIV -l INFO
+AllowUsers dp
+PermitRootLogin no
+PasswordAuthentication no
+X11Forwarding no
+AllowTcpForwarding no
+AllowStreamLocalForwarding no
+GatewayPorts no
+PermitTunnel no
+ClientAliveInterval 3600
+ClientAliveCountMax 3
+UsePAM yes
+ChallengeResponseAuthentication yes
+AuthenticationMethods publickey,keyboard-interactive
+```
+
+Setup [two-factor authentication for SSH](https://www.vultr.com/docs/how-to-setup-two-factor-authentication-2fa-for-ssh-on-debian-9-using-google-authenticator). 
+
+Check and apply:
+
+```bash
+sshd -t && service ssh reload && service ssh restart
+```
+
 
 ## Moduli ## 
 
