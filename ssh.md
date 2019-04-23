@@ -110,7 +110,7 @@ sshd: 10.0.0.10, 10.0.0.100
 List all allowed IPs in `/etc/ssh/sshd_config` file:
 
 ```
-AllowUsers = *@10.0.0.10, *@10.0.0.100
+AllowUsers = *@10.0.0.10 *@10.0.0.100
 ``` 
 
 
